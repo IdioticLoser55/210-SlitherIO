@@ -4,6 +4,7 @@ build/
 .classpath
 .project
 bin/
+lib/
 
 .idea/
 *.iml
