@@ -15,8 +15,10 @@ import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
 
+//built on JFrame used for making windows.
 final class MySlitherJFrame extends JFrame {
 
+    //what is going to be all the available skins. Not yet implemented.
     private static final String[] SNAKES = {
         "00 - purple",
         "01 - blue",
@@ -96,7 +98,7 @@ final class MySlitherJFrame extends JFrame {
     private final JTextArea log;
     private final JScrollBar logScrollBar;
     private final JTable highscoreList;
-    private final MySlitherCanvas canvas;
+    private final MySlitherCanvas canvas; //game canvas. extended from  JPanel.
 
     private final long startTime;
     private final Timer updateTimer;
@@ -108,9 +110,10 @@ final class MySlitherJFrame extends JFrame {
     final Object modelLock = new Object();
 
     MySlitherJFrame() {
-        super("MySlither");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
+        super("MySlither"); //calls the parent classes constructor. Passes it the window title
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE); //JFrame function tells it to actually close on close.
+        addWindowListener(new WindowAdapter() { //adds a window listener. used to monitor user input.
+            //configuration for WindowAdapter. Think its some sort of interface for a listener. Not entirely certain though and don't think I need to dig deeper.
             @Override
             public void windowClosing(WindowEvent e) {
                 updateTimer.cancel();
@@ -125,19 +128,24 @@ final class MySlitherJFrame extends JFrame {
                 }
             }
         });
-
+        
+        //This is the top level pane where content is placed. And then sets its layout.
         getContentPane().setLayout(new BorderLayout());
 
-        canvas = new MySlitherCanvas(this);
-        player = canvas.mouseInput;
+        //creates a new instance. Pretty sure this is where gameplay is going to be.
+        canvas = new MySlitherCanvas(this); //passes in the JFrame. think this is used to control synchronisation for drawing snakes but not sure.
+        player = canvas.mouseInput;         //something to do with getting user input.
 
         // === upper row ===
-        JPanel settings = new JPanel(new GridBagLayout());
+        JPanel settings = new JPanel(new GridBagLayout());//creates a new panel to place the settings on.
 
+        //declares a bunch of elements used in the settings.
         server = new JTextField(18);
 
+        //name input.
         name = new JTextField("MySlitherEaterBot", 16);
 
+        //colour option.
         snake = new JComboBox<>(SNAKES);
         snake.setMaximumRowCount(snake.getItemCount());
 
@@ -146,9 +154,10 @@ final class MySlitherJFrame extends JFrame {
             setStatus(null);
         });
 
+        //configures connect button.
         connect = new JToggleButton();
         connect.addActionListener(a -> {
-            switch (status) {
+            switch (status) {       //used to basically start the game. if game is already running disconnect. otherwise connect.
                 case DISCONNECTED:
                     connect();
                     break;
@@ -160,7 +169,9 @@ final class MySlitherJFrame extends JFrame {
                     break;
             }
         });
+        //implements a listener for connect in all classes it may be derived from.
         connect.addAncestorListener(new AncestorListener() {
+            //runs when the button is changed from visible to invisible. Pretty sure this only happens once.
             @Override
             public void ancestorAdded(AncestorEvent event) {
                 connect.requestFocusInWindow();
@@ -211,7 +222,7 @@ final class MySlitherJFrame extends JFrame {
         upperRow.add(settings);
         getContentPane().add(upperRow, BorderLayout.NORTH);
 
-        // === center ===
+        // === center === //centre left
         log = new JTextArea("hi");
         log.setEditable(false);
         log.setLineWrap(true);
@@ -239,6 +250,7 @@ final class MySlitherJFrame extends JFrame {
             }
         });
 
+        //centre right
         highscoreList = new JTable(10, 2);
         highscoreList.setEnabled(false);
         highscoreList.getColumnModel().getColumn(0).setMinWidth(64);
@@ -272,14 +284,15 @@ final class MySlitherJFrame extends JFrame {
         setLocation((screenWidth - getWidth()) / 2, (screenHeight - getHeight()) / 2);
         setExtendedState(MAXIMIZED_BOTH);
 
-        validate();
-        startTime = System.currentTimeMillis();
-        setStatus(Status.DISCONNECTED);
+        validate(); //tells the JFrame that its width height and location have all been set.
+        startTime = System.currentTimeMillis(); //stores the current time. Used in logging.
+        setStatus(Status.DISCONNECTED);         //sets the initial state. Not connected to the game server.
 
+        //sets up the timer. I'm pretty sure this is the gameplay timer but no clue what it does.
         updateTimer = new Timer();
         updateTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
-            public void run() {
+            public void run() { //the function updateTimer calls to update.
                 synchronized (modelLock) {
                     if (status == Status.CONNECTED && model != null) {
                         model.update();
@@ -287,16 +300,17 @@ final class MySlitherJFrame extends JFrame {
                     }
                 }
             }
-        }, 1, 10);
+        }, 1, 10); //do not replace this value. If anything makes it worse.
     }
 
+    //Is called from websocket. Think its being called when a socket/connection is opened.
     void onOpen() {
         switch (status) {
-            case CONNECTING:
-                setStatus(Status.CONNECTED);
-                client.sendInitRequest(snake.getSelectedIndex(), name.getText());
+            case CONNECTING:    //connection made while connecting.
+                setStatus(Status.CONNECTED);    //update status. Now know we've connected.
+                client.sendInitRequest(snake.getSelectedIndex(), name.getText());   //passes off name and colour to the slither server.
                 break;
-            case DISCONNECTING:
+            case DISCONNECTING: //connection made while disconnecting. Not sure why this would happened but just disconnects anyway
                 disconnect();
                 break;
             default:
@@ -304,6 +318,7 @@ final class MySlitherJFrame extends JFrame {
         }
     }
 
+    //called on closing a connection. Mostly just sets settings.
     void onClose() {
         switch (status) {
             case CONNECTED:
@@ -311,7 +326,7 @@ final class MySlitherJFrame extends JFrame {
                 setStatus(Status.DISCONNECTED);
                 client = null;
                 break;
-            case CONNECTING:
+            case CONNECTING:    //think this means connection failed / full or something and try a new connection. Makes a new one at least.
                 client = null;
                 trySingleConnect();
                 break;
@@ -321,13 +336,14 @@ final class MySlitherJFrame extends JFrame {
     }
 
     private void connect() {
-        new Thread(() -> {
+        new Thread(() -> { //creates a new thread and then bit below is function it runs.
             if (status != Status.DISCONNECTED) {
                 throw new IllegalStateException("Connecting while not disconnected");
             }
             setStatus(Status.CONNECTING);
-            setModel(null);
+            setModel(null); //still no clue what model is but resets it.
 
+            //gets a list of servers from slither and checks it actually got some.
             if (useRandomServer.isSelected()) {
                 log("fetching server-list...");
                 serverList = MySlitherWebSocketClient.getServerList();
@@ -339,6 +355,7 @@ final class MySlitherJFrame extends JFrame {
                 }
             }
 
+            //attempts to initiate a connection.
             if (status == Status.CONNECTING) {
                 trySingleConnect();
             }
@@ -349,11 +366,14 @@ final class MySlitherJFrame extends JFrame {
         if (status != Status.CONNECTING) {
             throw new IllegalStateException("Trying single connection while not connecting");
         }
-
+    
+        //connects to a server.
         if (useRandomServer.isSelected()) {
+            //makes/defines connection. But does not connect.
             client = new MySlitherWebSocketClient(serverList[(int) (Math.random() * serverList.length)], this);
-            server.setText(client.getURI().toString());
+            server.setText(client.getURI().toString());     //updates server text box. Basically letting user know what server they're on.
         } else {
+            //same process but this time its taking the server from the server text box and has to check its valid.
             try {
                 client = new MySlitherWebSocketClient(new URI(server.getText()), this);
             } catch (URISyntaxException ex) {
@@ -363,6 +383,7 @@ final class MySlitherJFrame extends JFrame {
             }
         }
 
+        //initiate connection.
         log("connecting to " + client.getURI() + " ...");
         client.connect();
     }

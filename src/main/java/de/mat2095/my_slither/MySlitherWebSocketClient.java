@@ -699,7 +699,7 @@ final class MySlitherWebSocketClient extends WebSocketClient {
 
         initRequest = new byte[4 + nick.length()];
         initRequest[0] = 115;
-        initRequest[1] = 10;
+        initRequest[1] = 10;        //could be refresh rate matches number from fixedRateScheduler
         initRequest[2] = (byte) snakeNr;
         initRequest[3] = (byte) nick.length();
         for (int i = 0; i < nick.length(); i++) {

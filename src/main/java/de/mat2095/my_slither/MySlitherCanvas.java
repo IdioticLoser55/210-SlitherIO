@@ -49,7 +49,7 @@ final class MySlitherCanvas extends JPanel {
 
     class MouseInput extends Player {
 
-        Double wang;
+        Double wang; //seems like w-Angle but not sure what the w is.
         boolean boost;
 
         private MouseInput() {
