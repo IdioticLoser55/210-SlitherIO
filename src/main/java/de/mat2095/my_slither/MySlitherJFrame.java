@@ -301,6 +301,8 @@ final class MySlitherJFrame extends JFrame {
             MySlitherCanvas.setSnakeColour((String) snake.getSelectedItem());
             setModel(null); //still no clue what model is but resets it.
 
+            MySlitherCanvas.changeEnemyColour();
+
             //gets a list of servers from slither and checks it actually got some.
             if (useRandomServer.isSelected()) {
                 log("fetching server-list...");

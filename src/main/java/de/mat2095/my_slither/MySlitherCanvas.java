@@ -12,6 +12,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
+import java.util.Random;
+
 
 
 final class MySlitherCanvas extends JPanel implements KeyListener {
@@ -28,7 +30,7 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
     private static final float[] SNAKE_HALO_FRACTIONS = new float[]{0.5f, 1f}; //don't change this. Has a hissy fit.
     private static final Color[] SNAKE_HALO_COLORS = new Color[]{new Color(0x60287BDE, true), new Color(0x00287BDE, true)}; //changes halo
     private static final Color[] OWN_SNAKE_HALO_COLORS = new Color[]{new Color(0x6039AFFF, true), new Color(0x0039AFFF, true)}; //changes halo colours
-    private static final Color SNAKE_BODY_COLOR = new Color(0x6A8759); //sets enemy body colour.
+    private static Color SNAKE_BODY_COLOR = new Color(0x6A8759); //sets enemy body colour.
     private static Color OWN_SNAKE_BODY_COLOR = new Color(0xA5C261);
     private static final Color MAP_COLOR = new Color(0xA0A9B7C6, true);  //changes mini map colour
     private static final Color MAP_POSITION_COLOR = new Color(0xE09E2927, true);
@@ -143,6 +145,12 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
         }
     }
     
+    public static void changeEnemyColour(){
+        Random random = new Random();
+        int nextInt = random.nextInt(0xffffff + 1);
+        SNAKE_BODY_COLOR = new Color(nextInt);
+    }
+
     @Override
     public void keyTyped(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_UP) {
