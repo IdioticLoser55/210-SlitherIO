@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 
 
-final class MySlitherCanvas extends JPanel implements KeyListener {
+final class MySlitherCanvas extends JPanel  {
 
     private static final Color BACKGROUND_COLOR = new Color(0x2B2B2B); //background colour of game area. Dark Grey ish.
     private static final Color FOREGROUND_COLOR = new Color(0xA9B7C6); //colour of in-game text.
@@ -45,40 +45,8 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
 
     final MouseInput mouseInput = new MouseInput();
 
-    @Override
-    public void keyTyped(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.VK_UP) {
-            //do something
-        }
-        if (event.getKeyCode() == KeyEvent.VK_DOWN) {
-            //do something
-        }
-        if (event.getKeyCode() == KeyEvent.VK_LEFT) {
-            //do something
-        }
-        if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
-            //do something
-        }
+    public static void setSnakeColour(String selectedItem) {
     }
-
-    @Override
-    public void keyPressed(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.VK_UP) {
-            //do something
-        }
-        if (event.getKeyCode() == KeyEvent.VK_DOWN) {
-            //do something
-        }
-        if (event.getKeyCode() == KeyEvent.VK_LEFT) {
-            //do something
-        }
-        if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
-            //do something
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) { }
 
     class MouseInput extends Player {
 
@@ -93,6 +61,27 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
 
         private void readWang(MouseEvent e) {
             wang = (Math.atan2((e.getY() - getHeight() / 2), (e.getX() - getWidth() / 2)) + PI2) % PI2;
+        }
+
+        @Override
+        public Wish action(MySlitherModel model) {
+            return new Wish(wang, boost);
+        }
+    }
+
+    class KeyInput extends Player {
+
+        Double wang;
+        boolean boost;
+
+        private KeyInput() {
+            super("Key Input");
+            wang = null;
+            boost = false;
+        }
+
+        private void readWangKey(KeyEvent e) {
+            wang = (Math.atan2((e.getKeyCode() - getHeight() / 2), (e.getKeyCode() - getWidth() / 2)) + PI2) % PI2;
         }
 
         @Override
@@ -145,6 +134,45 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
             @Override
             public void mouseEntered(MouseEvent e) {
                 mouseInput.readWang(e);
+            }
+        });
+
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent event) {
+                if (event.getKeyCode() == KeyEvent.VK_UP) {
+
+                }
+                if (event.getKeyCode() == KeyEvent.VK_DOWN) {
+                    //do something
+                }
+                if (event.getKeyCode() == KeyEvent.VK_LEFT) {
+                    //do something
+                }
+                if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    //do something
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent event) {
+                if (event.getKeyCode() == KeyEvent.VK_UP) {
+                    //do something
+                }
+                if (event.getKeyCode() == KeyEvent.VK_DOWN) {
+                    //do something
+                }
+                if (event.getKeyCode() == KeyEvent.VK_LEFT) {
+                    //do something
+                }
+                if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    //do something
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
             }
         });
 
