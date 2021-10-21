@@ -128,7 +128,7 @@ final class MySlitherJFrame extends JFrame {
                 }
             }
         });
-        
+
         //This is the top level pane where content is placed. And then sets its layout.
         getContentPane().setLayout(new BorderLayout());
 
@@ -366,7 +366,7 @@ final class MySlitherJFrame extends JFrame {
         if (status != Status.CONNECTING) {
             throw new IllegalStateException("Trying single connection while not connecting");
         }
-    
+
         //connects to a server.
         if (useRandomServer.isSelected()) {
             //makes/defines connection. But does not connect.
