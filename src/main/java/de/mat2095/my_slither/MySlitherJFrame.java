@@ -341,6 +341,8 @@ final class MySlitherJFrame extends JFrame {
                 throw new IllegalStateException("Connecting while not disconnected");
             }
             setStatus(Status.CONNECTING);
+
+            MySlitherCanvas.setSnakeColour((String) snake.getSelectedItem());
             setModel(null); //still no clue what model is but resets it.
 
             //gets a list of servers from slither and checks it actually got some.
