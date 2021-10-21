@@ -26,7 +26,7 @@ final class MySlitherJFrame extends JFrame {
         "03 - green",
         "04 - yellow",
         "05 - orange",
-        "06 - salmon",
+        "06 - pink",
         "07 - red",
         "08 - violet",
         "14 - white/red",
@@ -37,10 +37,8 @@ final class MySlitherJFrame extends JFrame {
         "20 - green/purple",
         "26 - grey/brown",
         "29 - black/yellow",
-        "31 - stars",
         "33 - yellow/black",
         "52 - red/yellow",
-        "62 - purple spiral",
         "63 - red/black",
         "64 - blue/black"
     };
