@@ -26,7 +26,7 @@ final class MySlitherCanvas extends JPanel {
     private static final float[] PREY_HALO_FRACTIONS = new float[]{0.5f, 1f};  //no clue what prey is.
     private static final Color[] PREY_HALO_COLORS = new Color[]{new Color(0x60FFFF00, true), new Color(0x00FFFF00, true)}; // no clue what prey.
     private static final Color SNAKE_COLOR = new Color(0x287BDE); //changes head colour.
-    private static final Color OWN_SNAKE_COLOR = new Color(0x39AFFF);
+    private static Color OWN_SNAKE_COLOR = new Color(0x39AFFF);
     private static final float[] SNAKE_HALO_FRACTIONS = new float[]{0.5f, 1f};
     private static final Color[] SNAKE_HALO_COLORS = new Color[]{new Color(0x60287BDE, true), new Color(0x00287BDE, true)};
     private static final Color[] OWN_SNAKE_HALO_COLORS = new Color[]{new Color(0x6039AFFF, true), new Color(0x0039AFFF, true)};
@@ -54,33 +54,93 @@ final class MySlitherCanvas extends JPanel {
         {
             case "00 - purple":
                 OWN_SNAKE_BODY_COLOR = new Color(0x8152EE);
+                OWN_SNAKE_COLOR = new Color(0x8152EE);
                 break;
 
             case "01 - blue":
-                OWN_SNAKE_BODY_COLOR = new Color(0x8152EE);
-
+                OWN_SNAKE_BODY_COLOR = new Color(0x4D00FF);
+                OWN_SNAKE_COLOR = new Color(0x4D00FF);
+                break;
             case "02 - cyan":
+                OWN_SNAKE_BODY_COLOR = new Color(0x00FFFF);
+                OWN_SNAKE_COLOR = new Color(0x00FFFF);
+                break;
             case "03 - green":
+                OWN_SNAKE_BODY_COLOR = new Color(0x9DFF00);
+                OWN_SNAKE_COLOR = new Color(0x9DFF00);
+                break;
             case "04 - yellow":
+                OWN_SNAKE_BODY_COLOR = new Color(0xFFDD00);
+                OWN_SNAKE_COLOR = new Color(0xFFDD00);
+                break;
             case "05 - orange":
+                OWN_SNAKE_BODY_COLOR = new Color(0xFF7700);
+                OWN_SNAKE_COLOR = new Color(0xFF7700);
+                break;
             case "06 - pink":
+                OWN_SNAKE_BODY_COLOR = new Color(0xF700FF);
+                OWN_SNAKE_COLOR = new Color(0xF700FF);
+                break;
             case "07 - red":
+                OWN_SNAKE_BODY_COLOR = new Color(0xFF0000);
+                OWN_SNAKE_COLOR = new Color(0xFF0000);
+                break;
             case "08 - violet":
+                OWN_SNAKE_BODY_COLOR = new Color(0x8F00FF);
+                OWN_SNAKE_COLOR = new Color(0x8F00FF);
+                break;
             case "09 - white/red":
+                OWN_SNAKE_BODY_COLOR = new Color(0xFF0000);
+                OWN_SNAKE_COLOR = new Color(0xFFFFFF);
+                break;
             case "10 - blue/yellow":
+                OWN_SNAKE_BODY_COLOR = new Color(0xFFDD00);
+                OWN_SNAKE_COLOR = new Color(0x4D00FF);
+                break;
             case "11 - white/blue":
+                OWN_SNAKE_BODY_COLOR = new Color(0x4D00FF);
+                OWN_SNAKE_COLOR = new Color(0xFFFFFF);
+                break;
             case "12 - red/white":
+                OWN_SNAKE_BODY_COLOR = new Color(0xFFFFFF);
+                OWN_SNAKE_COLOR = new Color(0xFF0000);
+                break;
             case "13 - white":
+                OWN_SNAKE_BODY_COLOR = new Color(0xFFFFFF);
+                OWN_SNAKE_COLOR = new Color(0xFFFFFF);
+                break;
             case "14 - green/purple":
+                OWN_SNAKE_BODY_COLOR = new Color(0xF700FF);
+                OWN_SNAKE_COLOR = new Color(0x9DFF00);
+                break;
             case "15 - grey/brown":
+                OWN_SNAKE_BODY_COLOR = new Color(0x964B00);
+                OWN_SNAKE_COLOR = new Color(0x808080);
+                break;
             case "16 - black/yellow":
+                OWN_SNAKE_BODY_COLOR = new Color(0xFFDD00);
+                OWN_SNAKE_COLOR = new Color(0x000000);
+                break;
             case "17 - yellow/black":
+                OWN_SNAKE_BODY_COLOR = new Color(0x000000);
+                OWN_SNAKE_COLOR = new Color(0xFFDD00);
+                break;
             case "18 - red/yellow":
+                OWN_SNAKE_BODY_COLOR = new Color(0xFFDD00);
+                OWN_SNAKE_COLOR = new Color(0xFF0000);
+                break;
             case "19 - red/black":
+                OWN_SNAKE_BODY_COLOR = new Color(0x000000);
+                OWN_SNAKE_COLOR = new Color(0xFF0000);
+                break;
             case "20 - blue/black":
+                OWN_SNAKE_BODY_COLOR = new Color(0x000000);
+                OWN_SNAKE_COLOR = new Color(0x4D00FF);
+                break;
 
             default:
                 OWN_SNAKE_BODY_COLOR = new Color(0xFF0027);
+                OWN_SNAKE_COLOR = new Color(0x4D00FF);
                 break;
         }
     }
