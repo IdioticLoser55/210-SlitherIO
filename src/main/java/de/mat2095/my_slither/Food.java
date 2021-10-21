@@ -1,6 +1,6 @@
 package de.mat2095.my_slither;
 
-
+//class used for food stats and placement.
 class Food {
 
     final int x, y;
@@ -16,10 +16,12 @@ class Food {
         spawnTime = System.currentTimeMillis();
     }
 
+    //doesn't really seem to be used.
     double getSize() {
         return size;
     }
 
+    //returns the radius of the food. think what is happening is that food grows up from nothing into its full size and this is what scales it. Not sure though.
     double getRadius() {
         double fillRate = rsp * (System.currentTimeMillis() - spawnTime) / 1200;
         if (fillRate >= 1) {

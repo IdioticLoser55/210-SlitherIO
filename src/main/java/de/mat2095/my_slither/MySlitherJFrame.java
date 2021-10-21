@@ -388,6 +388,7 @@ final class MySlitherJFrame extends JFrame {
         client.connect();
     }
 
+    //pretty obvious
     private void disconnect() {
         if (status == Status.DISCONNECTED) {
             throw new IllegalStateException("Already disconnected");
@@ -398,6 +399,7 @@ final class MySlitherJFrame extends JFrame {
         }
     }
 
+    //updates the status every where its used.
     private void setStatus(Status newStatus) {
         if (newStatus != null) {
             status = newStatus;
@@ -411,10 +413,12 @@ final class MySlitherJFrame extends JFrame {
         snake.setEnabled(status.allowModifyData);
     }
 
+    //used to print logging text.
     void log(String text) {
         print(String.format("%6d\t%s", System.currentTimeMillis() - startTime, text));
     }
 
+    //also used prints to the lgging window.
     private void print(String text) {
         SwingUtilities.invokeLater(() -> {
             boolean scrollToBottom = !logScrollBar.getValueIsAdjusting() && logScrollBar.getValue() >= logScrollBar.getMaximum() - logScrollBar.getVisibleAmount();
@@ -426,6 +430,7 @@ final class MySlitherJFrame extends JFrame {
         });
     }
 
+    //resets stats and sets the model to whatever is passed.
     void setModel(MySlitherModel model) {
         synchronized (modelLock) {
             this.model = model;
@@ -434,33 +439,41 @@ final class MySlitherJFrame extends JFrame {
         }
     }
 
+    //passes the map to the canvas but I have no idea how its being formatted or used.
     void setMap(boolean[] map) {
         canvas.setMap(map);
     }
 
+    //updates the rank stat
     void setRank(int newRank, int playerCount) {
         rank.setText(newRank + "/" + playerCount);
     }
 
+    //updates the kills stat.
     void setKills(int newKills) {
         kills.setText(String.valueOf(newKills));
     }
 
+    //used to place the values passed into the highscore table.
     void setHighscoreData(int row, String name, int length, boolean highlighted) {
         highscoreList.setValueAt(highlighted ? "<html><b>" + length + "</b></html>" : length, row, 0);
         highscoreList.setValueAt(highlighted ? "<html><b>" + name + "</b></html>" : name, row, 1);
     }
 
+    //connection status.
     private enum Status {
+        //implementations.
         DISCONNECTED("connect", false, true, true),
         CONNECTING("connecting...", true, true, false),
         CONNECTED("disconnect", true, true, false),
         DISCONNECTING("disconnecting...", false, false, false);
 
+        //used to define different aspects of the status.
         private final String buttonText;
         private final boolean buttonSelected, buttonEnabled;
         private final boolean allowModifyData;
 
+        //constructor for building statusi
         private Status(String buttonText, boolean buttonSelected, boolean buttonEnabled, boolean allowModifyData) {
             this.buttonText = buttonText;
             this.buttonSelected = buttonSelected;
