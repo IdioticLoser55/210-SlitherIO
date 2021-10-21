@@ -47,6 +47,7 @@ final class MySlitherCanvas extends JPanel {
 
     final MouseInput mouseInput = new MouseInput();
 
+    //Setting the snake colour
     public static void setSnakeColour(String color) {
         if (color.equals("00 - purple") == true) {
             OWN_SNAKE_BODY_COLOR = new Color(0x8152EE);
