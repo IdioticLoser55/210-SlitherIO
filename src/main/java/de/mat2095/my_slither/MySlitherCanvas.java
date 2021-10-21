@@ -24,19 +24,12 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
     private static final float[] PREY_HALO_FRACTIONS = new float[]{0.5f, 1f};  //no clue what prey is.
     private static final Color[] PREY_HALO_COLORS = new Color[]{new Color(0x60FFFF00, true), new Color(0x00FFFF00, true)}; // no clue what prey.
     private static final Color SNAKE_COLOR = new Color(0x287BDE); //changes head colour.
-<<<<<<< HEAD
-    private static Color OWN_SNAKE_COLOR = new Color(0x39AFFF);
-    private static final float[] SNAKE_HALO_FRACTIONS = new float[]{0.5f, 1f};
-    private static final Color[] SNAKE_HALO_COLORS = new Color[]{new Color(0x60287BDE, true), new Color(0x00287BDE, true)};
-    private static final Color[] OWN_SNAKE_HALO_COLORS = new Color[]{new Color(0x6039AFFF, true), new Color(0x0039AFFF, true)};
-=======
-    private static final Color OWN_SNAKE_COLOR = new Color(0x39AFFF); //players head colour.
+    private static Color OWN_SNAKE_COLOR = new Color(0x39AFFF); //players head colour.
     private static final float[] SNAKE_HALO_FRACTIONS = new float[]{0.5f, 1f}; //don't change this. Has a hissy fit.
     private static final Color[] SNAKE_HALO_COLORS = new Color[]{new Color(0x60287BDE, true), new Color(0x00287BDE, true)}; //changes halo
     private static final Color[] OWN_SNAKE_HALO_COLORS = new Color[]{new Color(0x6039AFFF, true), new Color(0x0039AFFF, true)}; //changes halo colours
->>>>>>> 4ca42d46415cd2aae5baa7f6b86cc3d89de0fddd
     private static final Color SNAKE_BODY_COLOR = new Color(0x6A8759); //sets enemy body colour.
-    private static final Color OWN_SNAKE_BODY_COLOR = new Color(0xA5C261);
+    private static Color OWN_SNAKE_BODY_COLOR = new Color(0xA5C261);
     private static final Color MAP_COLOR = new Color(0xA0A9B7C6, true);  //changes mini map colour
     private static final Color MAP_POSITION_COLOR = new Color(0xE09E2927, true);
     private static final Color NAME_SHADOW_COLOR = new Color(0xC02B2B2B, true);
@@ -52,7 +45,6 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
 
     final MouseInput mouseInput = new MouseInput();
 
-<<<<<<< HEAD
     //Setting the snake colour
     public static void setSnakeColour(String colour)
     {
@@ -148,7 +140,9 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
                 OWN_SNAKE_BODY_COLOR = new Color(0xFF0027);
                 OWN_SNAKE_COLOR = new Color(0x4D00FF);
                 break;
-=======
+        }
+    }
+    
     @Override
     public void keyTyped(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_UP) {
@@ -162,7 +156,6 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
         }
         if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
             //do something
->>>>>>> 4ca42d46415cd2aae5baa7f6b86cc3d89de0fddd
         }
     }
 
