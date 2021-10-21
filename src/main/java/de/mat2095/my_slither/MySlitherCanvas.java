@@ -3,9 +3,7 @@ package de.mat2095.my_slither;
 import static de.mat2095.my_slither.MySlitherModel.PI2;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
@@ -16,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 
 
-final class MySlitherCanvas extends JPanel {
+final class MySlitherCanvas extends JPanel implements KeyListener {
 
     private static final Color BACKGROUND_COLOR = new Color(0x2B2B2B); //background colour of game area. Dark Grey ish.
     private static final Color FOREGROUND_COLOR = new Color(0xA9B7C6); //colour of in-game text.
@@ -46,6 +44,41 @@ final class MySlitherCanvas extends JPanel {
     final ScheduledExecutorService repaintThread;
 
     final MouseInput mouseInput = new MouseInput();
+
+    @Override
+    public void keyTyped(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.VK_UP) {
+            //do something
+        }
+        if (event.getKeyCode() == KeyEvent.VK_DOWN) {
+            //do something
+        }
+        if (event.getKeyCode() == KeyEvent.VK_LEFT) {
+            //do something
+        }
+        if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
+            //do something
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.VK_UP) {
+            //do something
+        }
+        if (event.getKeyCode() == KeyEvent.VK_DOWN) {
+            //do something
+        }
+        if (event.getKeyCode() == KeyEvent.VK_LEFT) {
+            //do something
+        }
+        if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
+            //do something
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) { }
 
     class MouseInput extends Player {
 
