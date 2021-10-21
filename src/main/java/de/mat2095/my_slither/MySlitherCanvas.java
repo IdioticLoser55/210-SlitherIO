@@ -48,9 +48,40 @@ final class MySlitherCanvas extends JPanel {
     final MouseInput mouseInput = new MouseInput();
 
     //Setting the snake colour
-    public static void setSnakeColour(String color) {
-        if (color.equals("00 - purple") == true) {
-            OWN_SNAKE_BODY_COLOR = new Color(0x8152EE);
+    public static void setSnakeColour(String colour)
+    {
+        switch (colour)
+        {
+            case "00 - purple":
+                OWN_SNAKE_BODY_COLOR = new Color(0x8152EE);
+                break;
+
+            case "01 - blue":
+                OWN_SNAKE_BODY_COLOR = new Color(0x8152EE);
+
+            case "02 - cyan":
+            case "03 - green":
+            case "04 - yellow":
+            case "05 - orange":
+            case "06 - pink":
+            case "07 - red":
+            case "08 - violet":
+            case "09 - white/red":
+            case "10 - blue/yellow":
+            case "11 - white/blue":
+            case "12 - red/white":
+            case "13 - white":
+            case "14 - green/purple":
+            case "15 - grey/brown":
+            case "16 - black/yellow":
+            case "17 - yellow/black":
+            case "18 - red/yellow":
+            case "19 - red/black":
+            case "20 - blue/black":
+
+            default:
+                OWN_SNAKE_BODY_COLOR = new Color(0xFF0027);
+                break;
         }
     }
 

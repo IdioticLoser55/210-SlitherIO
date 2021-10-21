@@ -29,18 +29,18 @@ final class MySlitherJFrame extends JFrame {
         "06 - pink",
         "07 - red",
         "08 - violet",
-        "14 - white/red",
-        "16 - blue/yellow",
-        "17 - white/blue",
-        "18 - red/white",
-        "19 - white",
-        "20 - green/purple",
-        "26 - grey/brown",
-        "29 - black/yellow",
-        "33 - yellow/black",
-        "52 - red/yellow",
-        "63 - red/black",
-        "64 - blue/black"
+        "09 - white/red",
+        "10 - blue/yellow",
+        "11 - white/blue",
+        "12 - red/white",
+        "13 - white",
+        "14 - green/purple",
+        "15 - grey/brown",
+        "16 - black/yellow",
+        "17 - yellow/black",
+        "18 - red/yellow",
+        "19 - red/black",
+        "20 - blue/black"
     };
 
     // TODO: skins, prey-size, snake-length/width, bot-layer, that-other-thing(?), show ping
