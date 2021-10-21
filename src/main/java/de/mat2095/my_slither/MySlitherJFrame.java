@@ -128,7 +128,7 @@ final class MySlitherJFrame extends JFrame {
                 }
             }
         });
-        
+
         //This is the top level pane where content is placed. And then sets its layout.
         getContentPane().setLayout(new BorderLayout());
 
@@ -341,6 +341,8 @@ final class MySlitherJFrame extends JFrame {
                 throw new IllegalStateException("Connecting while not disconnected");
             }
             setStatus(Status.CONNECTING);
+
+            MySlitherCanvas.setSnakeColour((String) snake.getSelectedItem());
             setModel(null); //still no clue what model is but resets it.
 
             //gets a list of servers from slither and checks it actually got some.
@@ -366,7 +368,7 @@ final class MySlitherJFrame extends JFrame {
         if (status != Status.CONNECTING) {
             throw new IllegalStateException("Trying single connection while not connecting");
         }
-    
+
         //connects to a server.
         if (useRandomServer.isSelected()) {
             //makes/defines connection. But does not connect.
