@@ -292,16 +292,17 @@ final class MySlitherJFrame extends JFrame {
     }
 
     private void connect() {
+            MySlitherCanvas.setSnakeColour((String) snake.getSelectedItem());
+            setModel(null); //still no clue what model is but resets it.
+
+            MySlitherCanvas.changeEnemyColour();
+
         new Thread(() -> { //creates a new thread and then bit below is function it runs.
             if (status != Status.DISCONNECTED) {
                 throw new IllegalStateException("Connecting while not disconnected");
             }
             setStatus(Status.CONNECTING);
 
-            MySlitherCanvas.setSnakeColour((String) snake.getSelectedItem());
-            setModel(null); //still no clue what model is but resets it.
-
-            MySlitherCanvas.changeEnemyColour();
 
             //gets a list of servers from slither and checks it actually got some.
             if (useRandomServer.isSelected()) {
