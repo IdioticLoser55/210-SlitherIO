@@ -13,6 +13,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import java.util.Random;
+import java.util.*;
 
 
 
@@ -44,6 +45,8 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
     private long lastFrameTime;
     private double fps;
     final ScheduledExecutorService repaintThread;
+    private Hashtable<Integer, Color> enemyBodyColours = new Hashtable<Integer, Color>();
+    private Hashtable<Integer, Color> enemyHeadColours = new Hashtable<Integer, Color>();
 
     final MouseInput mouseInput = new MouseInput();
 
@@ -149,6 +152,27 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
         Random random = new Random();
         int nextInt = random.nextInt(0xffffff + 1);
         SNAKE_BODY_COLOR = new Color(nextInt);
+    }
+
+    public Color setCurrentEnemyBodyColour(Snake snake)
+    {
+        if(!enemyBodyColours.containsKey(snake.id))
+        {
+            Random randy = new Random();
+            enemyBodyColours.put(snake.id, new Color(randy.nextInt(0xffffff + 1)));
+        }
+
+        return enemyBodyColours.get(snake.id);
+    }
+    public Color setCurrentEnemyHeadColour(Snake snake)
+    {
+        if(!enemyHeadColours.containsKey(snake.id))
+        {
+            Random randy = new Random();
+            enemyHeadColours.put(snake.id, new Color(randy.nextInt(0xffffff + 1)));
+        }
+
+        return enemyHeadColours.get(snake.id);
     }
 
     @Override
@@ -337,7 +361,7 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
             model.snakes.values().forEach(snake -> {
                 double thickness = 16 + snake.body.size() / 4.0;
                 if (snake.body.size() >= 2) {
-                    g.setColor(snake == model.snake ? OWN_SNAKE_BODY_COLOR : SNAKE_BODY_COLOR);
+                    g.setColor(snake == model.snake ? OWN_SNAKE_BODY_COLOR : /*SNAKE_BODY_COLOR*/ setCurrentEnemyBodyColour(snake));
                     g.setStroke(new BasicStroke((float) thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
                     double totalLength = 0; // TODO: respect FAM, ???
@@ -379,7 +403,7 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
                         snake == model.snake ? OWN_SNAKE_HALO_COLORS : SNAKE_HALO_COLORS));
                     g.fillRect((int) Math.round(snake.x - thickness * 3 / 2 - 1), (int) Math.round(snake.y - thickness * 3 / 2 - 1), (int) (thickness * 3 + 2), (int) (thickness * 3 + 2));
                 }
-                g.setColor(snake == model.snake ? OWN_SNAKE_COLOR : SNAKE_COLOR);
+                g.setColor(snake == model.snake ? OWN_SNAKE_COLOR : /*SNAKE_COLOR*/setCurrentEnemyHeadColour(snake));
                 g.fill(new Ellipse2D.Double(snake.x - thickness * 2 / 3, snake.y - thickness * 2 / 3, thickness * 4 / 3, thickness * 4 / 3));
 
                 String lengthText = "" + model.getSnakeLength(snake.body.size(), snake.getFam());
