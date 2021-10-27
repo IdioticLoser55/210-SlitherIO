@@ -1,5 +1,6 @@
 package de.mat2095.my_slither;
 
+import java.util.Random;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -17,6 +18,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 //built on JFrame used for making windows.
 final class MySlitherJFrame extends JFrame {
+    private Random s;
+    private String n[]= new String[10];
 
     //what is going to be all the available skins. Not yet implemented.
     private static final String[] SNAKES = {
@@ -99,7 +102,22 @@ final class MySlitherJFrame extends JFrame {
         server = new JTextField(18);
 
         //name input.
-        name = new JTextField("MySlitherEaterBot", 16);
+
+        s = new Random();
+        n [0] = "James";
+        n [1] = "Bob";
+        n [2] = "Kyle";
+        n [3] = "BestSnake";
+        n [4] = "Lucas";
+        n [5] = "Ron";
+        n [6] = "Ned";
+        n [7] = "DoBetter";
+        n [8] = "Winner";
+        n [9] = "Lucky";
+
+
+        
+        name = new JTextField(n[s.nextInt(10)], 16);
 
         //colour option.
         snake = new JComboBox<>(SNAKES);
