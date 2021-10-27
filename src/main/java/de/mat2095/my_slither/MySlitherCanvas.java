@@ -195,15 +195,19 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_UP) {
             //do something
+            mouseInput.wang = 3 * Math.PI / 2;
         }
         if (event.getKeyCode() == KeyEvent.VK_DOWN) {
             //do something
+            mouseInput.wang = Math.PI/2;
         }
         if (event.getKeyCode() == KeyEvent.VK_LEFT) {
             //do something
+            mouseInput.wang = Math.PI;
         }
         if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
             //do something
+            mouseInput.wang = 0d;
         }
     }
 
@@ -237,6 +241,8 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
 
         setBackground(BACKGROUND_COLOR);
         setForeground(FOREGROUND_COLOR);
+
+        addKeyListener(this);
 
         addMouseWheelListener(e -> {
             zoom -= e.getWheelRotation();

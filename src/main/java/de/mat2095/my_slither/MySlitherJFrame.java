@@ -294,6 +294,7 @@ final class MySlitherJFrame extends JFrame {
     private void connect() {
             MySlitherCanvas.setSnakeColour((String) snake.getSelectedItem());
             setModel(null); //still no clue what model is but resets it.
+            canvas.requestFocus();
 
             MySlitherCanvas.changeEnemyColour();
 
