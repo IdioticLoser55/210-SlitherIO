@@ -209,10 +209,20 @@ final class MySlitherCanvas extends JPanel implements KeyListener {
             //do something
             mouseInput.wang = 0d;
         }
+        if (event.getKeyCode() == KeyEvent.VK_SPACE)
+        {
+            mouseInput.boost = true;
+        }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) { }
+    public void keyReleased(KeyEvent event) 
+    {
+        if (event.getKeyCode() == KeyEvent.VK_SPACE)
+        {
+            mouseInput.boost = false;
+        }
+    }
 
     class MouseInput extends Player {
 
