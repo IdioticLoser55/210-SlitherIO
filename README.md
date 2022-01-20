@@ -1,3 +1,5 @@
+Beginner group project. Just had to tweak some things in someone elses project.
+
 # MySlither
 A Java implementation of the [slither.io](https://slither.io) client.
 
